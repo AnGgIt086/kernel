@@ -1,0 +1,178 @@
+&pio {
+	pd2230_clk_spi_mode: clk_mode_default {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO97__FUNC_SPI4_CLK>;
+			drive-strength = <1>;
+		};
+	};
+
+	pd2230_mosi_spi_mode: mosi_mode_default {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO13__FUNC_SPI4_MO>;
+			drive-strength = <1>;
+		};
+	};
+	pd2230_cs_spi_mode: cs_mode_default {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO98__FUNC_SPI4_CSB>;
+			drive-strength = <1>;
+		};
+	};
+};
+
+&spi4 {
+	status = "okay";
+	vts_device@0 {
+		compatible = "vivo,ts-spi";
+		status = "okay";
+		reg=<0>;
+		spi-max-frequency = <4800000>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&pd2230_clk_spi_mode &pd2230_mosi_spi_mode &pd2230_cs_spi_mode>;
+
+		chipone {
+			compatible = "chipone,cts_nl9911c_spi";
+			status = "ok";
+			vts-type=<0>;
+			vts-ic-number=<110>;
+			spi-max-frequency = <9600000>;	//4800000,9600000,15000000,19200000
+			chipone,rst-gpio = <&pio 186 0x00>;
+			chipone,cs-gpio = <&pio 98 0x00>;
+			chipone,miso-gpio = <&pio 12 0x00>;
+			chipone,irq-gpio = <&pio 14 0x2001>;
+			chipone,x-res = <720>;
+			chipone,y-res = <1600>;
+			
+			sensor-test-key="com.chipone.touch.sensorcheck:MainActivity:android.intent.action.chipone:0:testResult";
+			rawdata-test-key="com.chipone.touch.datashow:DataShowActivity:null:null:null";
+			lcm-noise-test-key="com.chipone.touch.noise:NoiseActivity:null:null:null";
+			rf-noise-test-key="com.chipone.touch.noise:BspTestActivity:action_noise_test:0:result";
+		};
+		
+		ft8016 {
+			compatible = "focaltech,ft8756_v2";
+			vts-type=<0>;
+			vts-ic-number=<37>;
+			spi-max-frequency = <6000000>;	//4800000,9600000,15000000,19200000
+			focaltech,reset-gpio = <&pio 186 0x00>;
+			focaltech,irq-gpio = <&pio 14 0x02>;
+			focaltech,max-touch-number = <10>;
+			focaltech,display-coords = <0 0 720 1600>;
+			focaltech,ic_name = "ft8016";
+			focaltech,factory-reset = <1>;
+			focaltech,diff-distinguish = <1>;
+			sensor-test-key="com.focaltouchscreen.sensortest:MainActivity:com.focaltouchscreen.sensortest:0:focal_test_result";
+			lcm-noise-test-key="com.focaltech.deltadiff:MainActivity:null:null:null";
+			rawdata-test-key="com.focaltech.deltadiff:DataActivity:null:null:null";
+			rf-noise-test-key="com.focaltech.deltadiff:BspTestActivity:com.focaltech.deltadiff:0:testResult";
+		};
+	};
+};
+
+&touchscreencfg {
+	compatible = "vivo,touchscreen-config";
+	vivo,ts-product-name="PD2230";
+	status = "okay";
+	
+	tp_module1{
+		compatible = "vivo,touch-panel-module";
+		vts-ic-number=<110>;
+		vts-type=<0>;
+		vts-lcmid=<48>;// 0x30 INCL 9911  1211860
+		vts-dimention-x=<720>;
+		vts-dimention-y=<1600>;
+		vts-tx-sensors=<18>;
+		vts-rx-sensors=<32>;
+		vts-incell=<1>;
+		vts-need-caliberation=<0>;
+		vts-virtual-proximinity=<0>;
+		vts-long-press=<0>;
+		vts-module-vendor=<0xF0>;
+		vts-no-flash=<1>;
+		//vts-sleep-time=<50>;
+		vts-game-mode=<1>;
+		vts-game-idle-time=<10>;
+		vts-no-flash-unique-code=<1>;
+		vts-set-card-region=<1>;
+		vts-set-card-region-width = <200>;
+		vts-gesture=<1>;
+		vts-screenshot-triger=<1>;
+		vts-debug-cust=<1>;
+		vts-record=<0x20>;
+	};
+	tp_module2{
+		compatible = "vivo,touch-panel-module";
+		vts-ic-number=<110>;
+		vts-type=<0>;
+		vts-lcmid=<17>;// 0x11 INCL 9911  1211849
+		vts-dimention-x=<720>;
+		vts-dimention-y=<1600>;
+		vts-tx-sensors=<18>;
+		vts-rx-sensors=<32>;
+		vts-incell=<1>;
+		vts-need-caliberation=<0>;
+		vts-virtual-proximinity=<0>;
+		vts-long-press=<0>;
+		vts-module-vendor=<0xF0>;
+		vts-no-flash=<1>;
+		//vts-sleep-time=<50>;
+		vts-game-mode=<1>;
+		vts-game-idle-time=<10>;
+		vts-no-flash-unique-code=<1>;
+		vts-set-card-region=<1>;
+		vts-set-card-region-width = <200>;
+		vts-gesture=<1>;
+		vts-screenshot-triger=<1>;
+		vts-debug-cust=<1>;
+		vts-record=<0x20>;
+	};
+	tp_module3 {
+		compatible = "vivo,touch-panel-module";
+		vts-ic-number=<37>;
+		vts-type=<0>;
+		vts-lcmid=<145>;//FT8016 0x27
+		vts-dimention-x=<720>;
+		vts-dimention-y=<1600>;
+		vts-tx-sensors=<18>;
+		vts-rx-sensors=<32>;
+		vts-incell=<1>;
+		vts-need-caliberation=<0>;
+		vts-virtual-proximinity=<0>;
+		vts-long-press=<0>;
+		vts-module-vendor=<0xF0>;
+		vts-no-flash=<1>;
+		vts-no-flash-unique-code=<1>;
+		vts-gesture=<1>;
+		vts-debug-cust=<1>;
+	};
+};
+
+/ {
+	fragment@touch {
+		target-path = "/";
+		__overlay__ {
+			mobileevent {
+				status = "okay";
+				compatible = "vivo,mobile_event";
+				vivo-i2c-event=<1>;
+				vivo-channel-broken=<1>;
+				vivo-click-event=<1>;
+				vivo-unexpected-reset-event=<1>;
+				vivo-log-system=<0>;
+				vivo-prox-near=<0>;
+				vivo-ng-panel-detect=<1>;
+				vivo-ic-mode=<1>;
+				vivo-int-cost=<1>;
+				vivo-large-press-event=<1>;
+				vivo-multi-touch=<1>;
+				vivo-press-area=<1>;
+				vivo-edge-reject-fail=<1>;
+				vivo-resume-to-touch=<1>;
+				vivo-handler-cost=<1>;
+				vivo-five-more-touch=<1>;
+				vivo-game-touch-info=<1>;
+			};
+		};
+	};
+};
+

@@ -1,0 +1,6 @@
+config SND_SOC_FS1599
+	tristate "SoC Audio for FS1599 Smart K PA"
+	depends on I2C
+	default n
+	help
+	  This option enables support for FS1599 Smart K PA.

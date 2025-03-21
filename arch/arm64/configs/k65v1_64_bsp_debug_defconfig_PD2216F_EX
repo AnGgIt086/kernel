@@ -1,0 +1,121 @@
+CONFIG_MTK_AB_OTA_UPDATER=n
+CONFIG_MTK_CHARGER=n
+########add tf start############
+CONFIG_MMC_PARANOID_SD_INIT=y
+########add tf end##############
+########add vivo charging##############
+CONFIG_VIVO_CHARGING_NEW_ARCH=y
+CONFIG_FUEL_SUMMARY=y
+CONFIG_VIVO_CHARGING_FOR_2140=y
+CONFIG_MTK_XHCI=n
+CONFIG_TYPEC=y
+#CONFIG_MICROCHIP_PHY=n
+CONFIG_TCPC_CLASS=y
+#CONFIG_STM32l011X4=y
+CONFIG_TCPC_RT1711H=y
+CONFIG_VIVO_BQ25890H_FAST_CHARGING=y
+#CONFIG_VIVO_CHARGING_FOR_PD2139=y
+CONFIG_TCPC_MT6370=n
+CONFIG_TCPC_SGM7220=y
+CONFIG_TYPEC=y
+CONFIG_VIVO_FASTCHG_CURRENT_TEST=y
+#########add vivo charging end###########
+#######add taozongchen usb start########
+CONFIG_USB_RTL8152=y
+CONFIG_USB_LAN78XX=y
+CONFIG_USB_USBNET=y
+CONFIG_USB_ANNOUNCE_NEW_DEVICES=y
+CONFIG_USB_POWER_DELIVERY=n
+CONFIG_VIVO_CHARGING_FOR_2216=y
+########add taozongchen usb end##########
+
+CONFIG_SDCARD_FS=y
+
+# vivo changfengnan add for ecryptfs begin
+CONFIG_ECRYPT_FS=y
+# vivo changfengnan add for ecryptfs end
+
+CONFIG_CUSTOM_KERNEL_GRV_SENSOR=n
+CONFIG_CUSTOM_KERNEL_BAROMETER=n
+CONFIG_CUSTOM_KERNEL_GMRV_SENSOR=n
+CONFIG_CUSTOM_KERNEL_GYROSCOPE=y
+CONFIG_MTK_SAR_HUB=y
+CONFIG_MTK_SAR_SECONDARY_HUB=y
+CONFIG_MTK_RAISEUP_DETECT_HUB=y
+CONFIG_MTK_PUTDOWN_DETECT_HUB=y
+CONFIG_MTK_ANGLE_JUDGE_HUB=y
+CONFIG_MTK_ANGLE_DIRECTION_HUB=y
+CONFIG_MTK_WINDOW_ORIENTATION_HUB=y
+CONFIG_MTK_AMD_HUB=y
+CONFIG_MTK_AMBIENT_LIGHT_SCENE_HUB=y
+
+#vivo zhangjing add for modem config
+CONFIG_MTK_MD1_SUPPORT=11
+CONFIG_MTK_MD3_SUPPORT=0
+CONFIG_MTK_C2K_LTE_MODE=2
+CONFIG_MTK_ECCCI_C2K=y
+#vivo zhangjing add end
+########HQ add audio start##############
+#zhangguangshuai add aw87xxx smartpa
+CONFIG_SND_SOC_AW87XXX=y
+#wangziru add fs1599 k pa
+CONFIG_SND_SOC_FS1599=y
+########HQ add audio start##############
+
+# HQ add lcm start
+CONFIG_MTK_LCM=y
+CONFIG_VIVO_LCM_PD1732DF_CONTROL=y
+CONFIG_LCM_MODULE_SUPPORT=y
+CONFIG_CUSTOM_KERNEL_LCM="pd2216_txd_ft8016_hdplus_dsi_vdo pd2216_holitech_jd9365t_hdplus_dsi_vdo pd2216_boe_nt36525b_hdp_dsi_vdo pd2216_lce_icnl9911c_noflash_hdp_dsi_vdo pd2216_tianma_icnl9911c_noflash_hdp_dsi_vdo pd2216_hx_ft8656_noflash_hdp_dsi_vdo "
+# HQ add lcm end
+
+#HQ add camera start
+CONFIG_CUSTOM_KERNEL_IMGSENSOR="imx355txdpd2216main_mipi_raw imx355swnpd2216main_mipi_raw hi556lcepd2216front_mipi_raw ov13b10lcepd2216main_mipi_raw gc2375cxtpd2216macro_mipi_raw ov13b10txdpd2216main_mipi_raw ov02b10lcepd2216macro_mipi_raw s5k4h7lcepd2216main_mipi_raw s5k4h7sunpd2216main_mipi_raw gc2375sunpd2216macro_mipi_raw gc5035tlypd2216front_mipi_raw ov05a10txdpd2216front_mipi_raw imx258qtepd2216main_mipi_raw"
+CONFIG_SPECIFY_IMGSENSOR=y
+CONFIG_IMGSENSOR_MAIN="imx355txdpd2216main_mipi_raw imx355swnpd2216main_mipi_raw ov13b10lcepd2216main_mipi_raw ov13b10txdpd2216main_mipi_raw s5k4h7lcepd2216main_mipi_raw s5k4h7sunpd2216main_mipi_raw imx258qtepd2216main_mipi_raw"
+CONFIG_IMGSENSOR_SUB="hi556lcepd2216front_mipi_raw gc5035tlypd2216front_mipi_raw ov05a10txdpd2216front_mipi_raw"
+CONFIG_IMGSENSOR_MAIN2="gc2375cxtpd2216macro_mipi_raw ov02b10lcepd2216macro_mipi_raw gc2375sunpd2216macro_mipi_raw"
+CONFIG_IMGSENSOR_MAIN3=""
+CONFIG_IMGSENSOR_SUB2=""
+# CONFIG_IMGSENSOR_MAIN3 is not set
+CONFIG_MTK_CAM_PD2216F_EX=y
+CONFIG_MTK_VIDEOCODEC_DRIVER=y
+CONFIG_MTK_CAMERA_ISP_DPE_SUPPORT=y
+CONFIG_MTK_CAMERA_ISP_FD_SUPPORT=y
+CONFIG_MTK_IMGSENSOR=y
+CONFIG_MTK_FLASHLIGHT=y
+CONFIG_MTK_FLASHLIGHT_MT6370=y
+CONFIG_MTK_FLASHLIGHT_PT=n
+CONFIG_MTK_FLASHLIGHT_PT_STRICT=n
+CONFIG_MTK_FLASHLIGHT_DLPT=n
+CONFIG_RT_FLASHLIGHT=y
+CONFIG_MTK_FLASHLIGHT_LM3644=y
+CONFIG_MTK_LENS=y
+CONFIG_MTK_CAM_CAL=y
+CONFIG_MTK_CMDQ_V3=y
+CONFIG_MTK_SMI_EXT=y
+CONFIG_MTK_JPEG=y
+CONFIG_MTK_CCU=y
+CONFIG_MTK_CAM_SECURITY_SUPPORT=y
+CONFIG_MTK_CAM_GENIEZONE_SUPPORT=y
+CONFIG_MTK_SENSOR_SUPPORT=y
+CONFIG_VIVO_SENSOR_SCP_RESET_ENABLE=y
+#HQ add camera end
+
+#add for fingerprint start
+CONFIG_MTK_TEE_GP_SUPPORT=y
+CONFIG_TEE=y
+CONFIG_TRUSTONIC_TEE_SUPPORT=y
+CONFIG_BBK_FINGERPRINT=y
+CONFIG_BBK_FP_MODULE=y
+CONFIG_BBK_FP_ID=y
+CONFIG_BBK_GF3626=y
+#add for fingerprint end
+
+#add for disable vpa regulator control start
+CONFIG_VIVO_DISABLE_VPA_REGULATOR_CTRL=y
+#add for disable vpa regulator control end
+
+#######vivo add for LCM begin#######
+CONFIG_CUSTOM_KERNEL_LCM="pd2036_boe_nt36525b_noflash_hdp_dsi_vdo"
+#######vivo add for LCM end#######

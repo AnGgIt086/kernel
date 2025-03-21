@@ -1,0 +1,15 @@
+
+## Enable TEE by hw security team
+CONFIG_TEE=y
+CONFIG_TRUSTONIC_TEE_SUPPORT=y
+CONFIG_MTK_TEE_GP_SUPPORT=y
+
+# vivo XieJiYuan add for kernel hardening begin
+CONFIG_SLAB_FREELIST_RANDOM=y
+CONFIG_SLAB_FREELIST_HARDENED=y
+# vivo XieJiYuan add for kernel hardening end
+
+########add tf start############
+CONFIG_MMC_PARANOID_SD_INIT=y
+########add tf end##############
+

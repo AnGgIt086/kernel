@@ -1,0 +1,169 @@
+
+&spi5 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	
+	vts_device@0 {
+		compatible = "vivo,ts-spi";
+		status = "okay";
+		reg=<0>;
+		spi-max-frequency = <9600000>;
+		//pinctrl-names ="default";
+		//pinctrl-0 = <&spi_pins_pd2139f_cfg>;
+		nt36528 {
+			compatible = "novatek,NVT-ts-spi-v2";
+			status = "ok";
+		
+			vts-type=<0>;
+			vts-ic-number=<85>;
+			spi-max-frequency = <9600000>;	//4800000,9600000,15000000,19200000
+			//pinctrl-names = "spi_clk_active","spi_mosi_active";
+			//pinctrl-0 = <&spi2_clk_set_cfg>;
+			novatek,reset-gpio = <&pio 19 0x00>;
+			novatek,irq-gpio = <&pio 1 0x02>;
+
+			sensor-test-key="com.nttouchscreen.mptest:MainActivity:android.intent.action.novatek:0:testResult";
+			lcm-noise-test-key="com.nt36xxxtouchscreen.deltadiff:MainActivity:null:null:null";
+			rawdata-test-key="com.nttouchscreen.getdata:MainActivity:null:null:null";
+			rf-noise-test-key="com.nt36xxxtouchscreen.deltadiff:BspTest:android.intent.action.nvtdeltadiff:0:testResult";
+			
+			/* 672 */
+			//novatek,swrst-n8-addr = <0x01F01A>;
+
+			/* 672A */
+			novatek,swrst-n8-addr = <0x03F0FE>;
+		};
+		
+		td4160 {
+			compatible = "ovt,tcm_td4375_v2";
+			status = "ok";
+
+			vts-type=<0>;
+			vts-ic-number=<120>;
+			spi-max-frequency = <9600000>;	//4800000,9600000,15000000,19200000
+			ovt,irq-gpio = <&pio 1 0x08>;
+			//ovt,cs-gpio = <&pio 98 0x00>;
+			ovt,spi-mode = <3>;
+			ovt,ubl-max-freq = <9600000>;
+			ovt,ubl-byte-delay-us = <20>;
+			ovt,reset-gpio = <&pio 19 0x00>;
+			ovt,attn_polarity = <0x02>;
+			ovt,power-on-state = <1>;
+			ovt,irq-on-state = <0>;
+			//ovt,power-delay-ms = <200>;
+			ovt,reset-delay-ms = <120>;
+			ovt,reset-on-state = <0>;
+			ovt,reset-active-ms = <1>;
+			ovt,reset-shutdown = <1>;
+
+			sensor-test-key = "com.vivotouchscreen.ovttdditool:ActivityVIVOProduction:com.vivotouchscreen.ovttdditool:0:com.vivotouchscreen.ovttdditool";
+			lcm-noise-test-key = "com.vivotouchscreen.ovtdeltadiff:MainActivity:null:null:null";
+			rawdata-test-key="com.vivotouchscreen.ovttdditool:MainActivity:null:null:null";
+			rf-noise-test-key="com.vivotouchscreen.ovtdeltadiff:OvtBspTest:com.vivotouchscreen.ovtdeltadiff:0:testResult";
+		};
+		
+		chipone_tddi {
+			compatible = "chipone-tddi";
+			status = "ok";
+			vts-ic-number=<111>;
+			spi-max-frequency = <9600000>;	//4800000,9600000,15000000,19200000
+			chipone,irq-gpio = <&pio 1 0x02>;
+			chipone,rst-gpio = <&pio 19 0x00>;
+			chipone,x-res = <720>;
+			chipone,y-res = <1600>;
+			sensor-test-key="com.touchscreen.chipone9916.test:MainActivity:android.intent.action.chipone:0:testResult";
+			rawdata-test-key="com.touchscreen.chipone9916.rawdata:DataShowActivity:null:null:null";
+			lcm-noise-test-key="com.touchscreen.chipone9916.noise:NoiseActivity:null:null:null";
+			rf-noise-test-key="com.touchscreen.chipone9916.noise:BspTestActivity:action_noise_test:0:result";
+		};
+	};
+};
+
+&touchscreencfg {
+	compatible = "vivo,touchscreen-config";
+	vivo,ts-product-name="PD2226F_EX";
+	status = "okay";
+	
+	tp_modue1{    // NT365258 1211839
+		compatible = "vivo,touch-panel-module";
+		vts-ic-number=<85>;
+		vts-type=<0>;
+		vts-lcmid=<48>;  //   INX  nt36528
+		vts-dimention-x=<720>;
+		vts-dimention-y=<1612>;
+		vts-tx-sensors=<18>;
+		vts-rx-sensors=<32>;
+		vts-incell=<1>;
+		vts-need-caliberation=<0>;
+		vts-virtual-proximinity=<0>;
+		vts-long-press=<0>;
+		vts-module-vendor=<0xF0>;
+		vts-no-flash=<1>;
+		vts-game-mode=<0>;
+		vts-game-idle-time=<0>;
+		vts-report-timestamp=<1>;
+		vts-gesture=<1>;
+		vts-input-method=<1>;
+		vts-debug-cust=<1>;
+	};
+	
+	tp_module2 {    //1211843 td4160
+		compatible = "vivo,touch-panel-module";
+		vts-ic-number=<120>;
+		vts-type=<0>;
+		vts-lcmid=<145>;//td4160 ovt
+		vts-dimention-x=<720>;
+		vts-dimention-y=<1612>;
+		vts-tx-sensors=<18>;
+		vts-rx-sensors=<32>;
+		vts-incell=<1>;
+		vts-need-caliberation=<0>;
+		vts-virtual-proximinity=<0>;
+		vts-long-press=<0>;
+		vts-module-vendor=<0xF0>;
+		vts-no-flash=<1>;
+		vts-game-mode=<1>;
+		vts-game-idle-time=<10>;
+		vts-report-timestamp=<1>;
+		vts-gesture=<1>;
+	};
+	
+	tp_modue3{    //1211847  
+		compatible = "vivo,touch-panel-module";
+		vts-ic-number=<111>;
+		vts-type=<0>;
+		vts-lcmid=<18>;//  INCL9916
+		vts-dimention-x=<720>;
+		vts-dimention-y=<1612>;
+		vts-tx-sensors=<18>;
+		vts-rx-sensors=<32>;
+		vts-incell=<1>;
+		vts-module-vendor=<0xF0>;
+		vts-no-flash=<1>;
+		vts-gesture=<1>;
+		vts-debug-cust=<1>;
+		vts-no-flash-unique-code=<1>;
+	};
+	tp_modue4{    // NT365258 1211875
+		compatible = "vivo,touch-panel-module";
+		vts-ic-number=<85>;
+		vts-type=<0>;
+		vts-lcmid=<51>;  //   INX  nt36528
+		vts-dimention-x=<720>;
+		vts-dimention-y=<1612>;
+		vts-tx-sensors=<18>;
+		vts-rx-sensors=<32>;
+		vts-incell=<1>;
+		vts-need-caliberation=<0>;
+		vts-virtual-proximinity=<0>;
+		vts-long-press=<0>;
+		vts-module-vendor=<0xF0>;
+		vts-no-flash=<1>;
+		vts-game-mode=<0>;
+		vts-game-idle-time=<0>;
+		vts-report-timestamp=<1>;
+		vts-gesture=<1>;
+		vts-input-method=<1>;
+		vts-debug-cust=<1>;
+	};
+};

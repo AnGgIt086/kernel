@@ -1,0 +1,18 @@
+config EXTCON_MTK_USB
+	tristate "MediaTek EXTCON USB Support"
+	select EXTCON
+	select USB_ROLE_SWITCH
+	help
+	  Say Y here to enable extcon support for USB cable detection
+	  on the Mediatek PMIC.
+config  VIVO_FORCE_USB_DEVICE
+	tristate "MediaTek EXTCON FORCE USB"
+	select EXTCON
+	help
+	  Say Y here to enable extcon force usb if
+	  charge not configure properly
+config VIVO_USB_OTG_ALARM
+	tristate "Vivo USB OTG alarm Support"
+	select EXTCON
+	help
+	  Say Y here to enable USB OTG alarm Support

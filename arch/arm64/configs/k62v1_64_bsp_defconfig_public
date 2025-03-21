@@ -1,0 +1,20 @@
+CONFIG_SECURITY_SELINUX_DEVELOP=y
+
+#add for tee driver start
+CONFIG_TEE=y
+CONFIG_TRUSTONIC_TEE_SUPPORT=y
+CONFIG_MTK_TEE_GP_SUPPORT=y
+#add for tee driver end
+
+# vivo add for usb begin
+CONFIG_USB_RTL8152=y
+CONFIG_USB_LAN78XX=y
+CONFIG_USB_USBNET=y
+CONFIG_USB_ANNOUNCE_NEW_DEVICES=y
+# vivo add for usb end
+
+# vivo XieJiYuan add for kernel hardening begin
+CONFIG_SLAB_FREELIST_RANDOM=y
+CONFIG_SLAB_FREELIST_HARDENED=y
+# vivo XieJiYuan add for kernel hardening end
+

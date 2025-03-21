@@ -1,0 +1,1 @@
+obj-y += ov05a10qtepd2236frontmipiraw_Sensor.o

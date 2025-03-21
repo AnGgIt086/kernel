@@ -1,0 +1,13 @@
+config MTK_TYPEC_ACCDET
+	bool "MediaTek TYPEC ACCDET driver"
+	help
+	  TYPEC ACCDET driver is for headset detect and support for MediaTek SOC
+	  If you want to use MediaTek TYPEC ACCDET driver,
+	  say Y.
+	  If unsure, say N.
+config SND_SOC_MAX20328
+	tristate "max20328 for USB Type-C Audio Adapter Accessories"
+	depends on I2C
+	select MTK_TYPEC_ACCDET
+	help
+	  The MAX20328 are USB Type-C audio interface ICs for use in portable devices

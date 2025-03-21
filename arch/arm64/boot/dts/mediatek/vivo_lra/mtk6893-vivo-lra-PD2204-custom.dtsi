@@ -1,0 +1,111 @@
+/* vivo zhangxiaodong add for aw8624 haptic begin */
+
+// for samsung
+
+// If the hardware is pulled up, no configuration is required
+&vibrator0{
+status = "disable";
+};
+
+&pio {
+	lra_int_active: lra_int_active {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO73__FUNC_GPIO73>;
+			drive-strength = <2>;
+			bias-pull-up;
+			input-enable;
+		};
+	};
+};
+
+&i2c3 {
+	status = "okay";
+	#address-cells = <1>;
+	#size-cells = <0>;
+	clock-frequency = <400000>;
+	mediatek,use-open-drain;
+
+	lra_haptic@5A { // aw8624
+		compatible = "awinic,aw8624_haptic";
+		reg = <0x5A>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&lra_int_active>; // INT
+		irq-gpio = <&pio 73 0>;
+		reset-gpio = <&pio 72 0>;
+		status = "okay";
+		resistance_min = <18000>;
+		resistance_max = <35000>;
+		freq_min = <2200>;
+		freq_max = <2500>;
+		lra_info = <832>;
+		disable-trigger;
+		awinic,vmax = <2500>;
+
+		effect_list_aw862xx = <&vivo_lra_effects_aw862xx>;
+		scene_array_aw862xx = <&vivo_lra_scenes_aw862xx>; //scene config list
+
+		vivo_lra_effects_aw862xx: vivo_lra_effects_aw862xx {
+			status = "okay";
+			compatible = "vivo,lra_effects_aw8624";
+		};
+
+		vivo_lra_scenes_aw862xx: vivo_lra_scenes_aw862xx {
+			status = "okay";
+			compatible = "vivo,lra_scenes_aw8624";
+		};
+
+	};
+
+	aw8622x_haptic@58 {
+		compatible = "awinic,aw8622x_haptic";
+		reg = <0x58>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&lra_int_active>; // INT
+		irq-gpio = <&pio 73 0>;
+		reset-gpio = <&pio 72 0>;
+		status = "okay";
+		resistance_min = <18000>;
+		resistance_max = <35000>;
+		freq_min = <2200>;
+		freq_max = <2500>;
+		lra_info = <832>;
+		//disable-trigger;
+		effect,add-suffix;
+		awinic,vmax = <2500>;
+
+		/*aw8622x dts info*/
+		aw8622x_vib_mode = < 0 >; /* mode: RAM mode->0; CONT mode->1 */
+		aw8622x_vib_f0_pre = < 2350 >;
+		aw8622x_vib_f0_cali_percen = < 7 >;
+		aw8622x_vib_cont_drv1_lvl = < 0x7F >;
+		aw8622x_vib_cont_drv2_lvl = < 0x36 >;
+		aw8622x_vib_cont_brk_time = < 0x06 >;
+		aw8622x_vib_cont_tset = < 0x06 >;
+		aw8622x_vib_cont_bemf_set = < 0x02 >;
+		aw8622x_vib_cont_drv_width = < 0x6A >;
+		aw8622x_vib_cont_wait_num = < 0x06 >;
+		aw8622x_vib_cont_brk_gain = < 0x08 >;
+		aw8622x_vib_cont_drv1_time = < 0x04 >;
+		aw8622x_vib_cont_drv2_time = < 0x14 >;
+		aw8622x_vib_cont_track_margin = < 0x12 >;
+		aw8622x_vib_sine_array = < 0x05 0xB2 0xFF 0xEF >; /* SIN_H SIN_L COS_H COS_L*/
+		aw8622x_vib_d2s_gain = < 0x05 >;
+		aw8622x_vib_prctmode = < 0x2D 0x3E 0x3F >;
+
+		effect_list_aw862xx = <&vivo_lra_effects_aw862xx>;
+		scene_array_aw862xx = <&vivo_lra_scenes_aw862xx>; //scene config list
+
+//		vivo_lra_effects_aw862xx: vivo_lra_effects_aw862xx {
+//			status = "okay";
+//			compatible = "vivo,lra_effects_aw862xx";
+//		};
+
+//		vivo_lra_scenes_aw862xx: vivo_lra_scenes_aw862xx {
+//			status = "okay";
+//			compatible = "vivo,lra_scenes_aw862xx";
+//		};
+
+	};
+};
+
+#include "mtk6893-vivo-lra-PD2204-effects_aw862xx.dtsi"

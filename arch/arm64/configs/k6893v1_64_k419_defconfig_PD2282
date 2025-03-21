@@ -1,0 +1,89 @@
+
+########add vivo charging##############
+#CONFIG_VCHG_VFCS_NEW_ARCH=y
+CONFIG_BAT_CHG_VIVO_DOCU=y
+CONFIG_VIVO_CHARGING_NEW_ARCH=y
+CONFIG_FUEL_SUMMARY=y
+CONFIG_STM32l011X4=y
+CONFIG_VIVO_USBID_ENABLE=y
+CONFIG_VIVO_CHARGING_DTS_MOVE_HEAD_FILE=n
+CONFIG_MTK_CHARGER=n
+CONFIG_MTK_TYPEC_WATER_DETECT=n
+CONFIG_MTK_TYPEC_WATER_DETECT_BY_PCB=n
+CONFIG_VIVO_CHARGING_FOR_PD2204=y
+CONFIG_VIVO_CHARGING_FOR_FG_EX=n
+CONFIG_CABLE_TYPE_DETECTION=y
+########add vivo charging end###########
+
+#add for fingerprint start
+CONFIG_BBK_FINGERPRINT=y
+CONFIG_BBK_FP_DISPATCH_EVENT=y
+CONFIG_BBK_FP_ID=y
+CONFIG_BBK_GF9578=y
+#add for fingerprint end
+
+##############add for lcm start###############
+CONFIG_DRM_PANEL_PD2282_BOE_NT37705_FHDP_CMD=y
+CONFIG_VIVO_LCM_DCDC_SUPPORT=y
+CONFIG_LEDS_MTK_DISP=y
+CONFIG_MTK_LEDS=y
+CONFIG_MTK_AAL_SUPPORT=y
+CONFIG_MTK_HIGH_FRAME_RATE=y
+CONFIG_MTK_ROUND_CORNER_SUPPORT=y
+CONFIG_MTK_HDR_VIDEO_SUPPORT=y
+CONFIG_MTK_DRE30_SUPPORT=y
+CONFIG_VIVO_BIT32_AAL_12_BIT=y
+CONFIG_VIVO_READ_DDIC_REG=y
+##############add for lcm end######################
+
+### add by vivo sensor team begin ###
+CONFIG_SENSOR_HUB_MONITOR=y
+CONFIG_MTK_VIBRATOR=y
+CONFIG_LEDS_REGULATOR_VIBRATOR=n
+### add by vivo sensor team end  ###
+
+### =============== vivo linzhinan add for audio ============== ###
+CONFIG_VIVO_SOC_CODEC=n
+CONFIG_VIVO_CODEC_COMMON=y
+CONFIG_MTK_TYPEC_ACCDET=y
+CONFIG_SND_SOC_MAX20328=y
+CONFIG_SND_SOC_VIVO_KTV=y
+CONFIG_ACCDET_EINT_IRQ=n
+CONFIG_ACCDET_SUPPORT_EINT0=n
+CONFIG_MTK_ACCDET=y
+CONFIG_ACCDET_EINT=y
+CONFIG_SND_CODEC_TAS2562=y
+CONFIG_TAS2562_REGMAP=y
+CONFIG_TAS2562_CODEC=y
+### ============================= end ============================= ###
+
+#vivo chenxiaoju add for widevine L1 begin
+CONFIG_MTK_ENABLE_GENIEZONE=y
+CONFIG_MTK_SEC_VIDEO_PATH_SUPPORT=y
+CONFIG_MTK_DRM_KEY_MNG_SUPPORT=y
+CONFIG_MTK_PERSIST_PARTITION_SUPPORT=y
+CONFIG_MTK_WVDRM_L1_SUPPORT=y
+CONFIG_MTK_SVP_ON_MTEE_SUPPORT=y
+#vivo chenxiaoju add for widevine L1 end
+
+#vivo liujie add for Audio VOW begin
+CONFIG_MTK_VOW_SUPPORT=y
+CONFIG_MTK_VOW_DUAL_MIC_SUPPORT=y
+CONFIG_MTK_VOW_MAX_PDK_NUMBER=1
+CONFIG_MTK_VOW_BARGE_IN_SUPPORT=y
+CONFIG_MTK_VOW_PCMCALLBACK_SUPPORT="2nd_stage"
+CONFIG_MTK_VOW_DSP_VERSION="ver02"
+CONFIG_MTK_VOW_YUEMENG_SUPPORT=y
+#vivo liujie add for Audio VOW end
+
+# vivo zhouyiming add for remove mtkt_flash_light begin
+CONFIG_REMOVE_MTKT_FLASH_LIGHT_PD2282=y
+# vivo zhouyiming add for remove mtkt_flash_light end
+
+# mzj add for tp begin
+CONFIG_HID_MULTITOUCH=y
+# mzj add for tp end
+
+#vivo zhouyiming add for suspend debug begin
+CONFIG_SUSPEND_ADD_UTC_DEBUG=y
+#vivo zhouyiming add for suspend debug begin

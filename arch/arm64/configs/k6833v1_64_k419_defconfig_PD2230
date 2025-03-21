@@ -1,0 +1,52 @@
+#add by tanghuan for ufs
+CONFIG_UFS_IO_STATISTICS=y
+######add vivo LCM PANEL########
+CONFIG_DRM_PANEL_PD2230A_BOE_ICN9911C_HDPLUS_VIDEO=y
+CONFIG_DRM_PANEL_PD2230_TXD_FT8016_HDPLUS_VIDEO=y
+CONFIG_VIVO_LCM_DCDC_SUPPORT=y
+CONFIG_VIVO_BACKLIGHT_SUPPORT_LM3697=n
+CONFIG_LEDS_MTK_DISP=y
+CONFIG_LEDS_MTK_PWM=y
+CONFIG_LEDS_MTK_I2C=n
+CONFIG_VIVO_READ_DDIC_REG=y
+#######add vivo LCM PANEL end######
+
+#vivo usb otg add begin
+CONFIG_VIVO_USB_OTG_ALARM=m
+#vivo usb otg alarm add end
+
+#add for fingerprint start
+CONFIG_BBK_FINGERPRINT=y
+CONFIG_BBK_FP_MODULE=y
+CONFIG_BBK_FP_ID=y
+CONFIG_BBK_FT9391=y
+CONFIG_BBK_ICNF7312=y
+CONFIG_BBK_GF3956=y
+CONFIG_BBK_EC617=y
+#add for fingerprint end
+########add audio start##################
+CONFIG_ACCDET_EINT_IRQ=n
+CONFIG_ACCDET_SUPPORT_EINT0=n
+CONFIG_MTK_ACCDET=y
+CONFIG_ACCDET_EINT=y
+CONFIG_VIVO_CODEC_SIA81XX=y
+CONFIG_VIVO_CODEC_FS1519N=y
+
+# add by sensor team begin
+CONFIG_SENSOR_HUB_MONITOR=y
+# add by sensor team end
+
+########add audio end##################
+#vivo rongqianfeng add for memory big data
+CONFIG_MEM_BIGDATA=y
+#vivo rongqianfeng add for memory big data
+
+#add for PD2230 BoardTemp
+CONFIG_PD2230_BOARD_TEMP=y
+#add for PD2230 BoardTemp end
+
+
+
+########add tf start############
+CONFIG_MMC_PARANOID_SD_INIT=y
+########add tf end##############

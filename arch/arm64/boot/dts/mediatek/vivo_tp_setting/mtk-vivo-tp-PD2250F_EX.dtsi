@@ -1,0 +1,89 @@
+&pio {
+	pd2250_clk_spi_mode: clk_mode_default {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO97__FUNC_SPI4_CLK>;
+			drive-strength = <1>;
+		};
+	};
+
+	pd2250_mosi_spi_mode: mosi_mode_default {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO13__FUNC_SPI4_MO>;
+			drive-strength = <0>;
+		};
+	};
+};
+
+&spi4 {
+	status = "okay";
+	vts_device@0 {
+		compatible = "vivo,ts-spi";
+		status = "okay";
+		reg=<0>;
+		spi-max-frequency = <4800000>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&pd2250_clk_spi_mode &pd2250_mosi_spi_mode>;
+
+		chipone {
+			compatible = "chipone,cts_nl9911c_spi";
+			status = "ok";
+			vts-type=<0>;
+			vts-ic-number=<110>;
+			spi-max-frequency = <9600000>;	//4800000,9600000,15000000,19200000
+			chipone,rst-gpio = <&pio 186 0x00>;
+			chipone,cs-gpio = <&pio 98 0x00>;
+			chipone,miso-gpio = <&pio 12 0x00>;
+			chipone,irq-gpio = <&pio 14 0x2001>;
+			chipone,x-res = <720>;
+			chipone,y-res = <1600>;
+
+			sensor-test-key="com.touchscreen.chipone:MainActivity:android.intent.action.chipone:0:testResult";
+			rawdata-test-key="com.touchscreen.chipone.icnl9911c:DataShowActivity:null:null:null";
+			lcm-noise-test-key="com.touchscreen.chipone.vivo_noise:NoiseActivity:null:null:null";
+			rf-noise-test-key="com.touchscreen.chipone.vivo_noise:BspTestActivity:action_noise_test:0:result";
+		};
+
+		ili_9882n {
+			status = "okay";
+			compatible = "tchip,ilitek";
+			vts-type=<0>;
+			vts-ic-number=<91>;
+			spi-max-frequency = <9600000>;
+			touch,reset-gpio = <&pio 186 0x00>;
+			touch,irq-gpio = <&pio 14 0x2001>;
+
+			sensor-test-key="com.ilitek.touchscreen.tptest3X:MP3XActivity:com.ilitek.touchscreen.action.tptest:0:ILITEK_TpTestResult";
+			lcm-noise-test-key="com.ilitek.touchscreen.noisev2:MainActivity:null:null:null";
+			rawdata-test-key="com.ilitek.touchscreen.noisev2:DataShowActivity:null:null:null";
+			rf-noise-test-key="com.ilitek.touchscreen.noisev2:BspTestActivity:com.ilitek.touchscreen.action.noisetest:0:ILITEK_TpTestResult";
+		};
+	};
+};
+
+&touchscreencfg {
+	compatible = "vivo,touchscreen-config";
+	vivo,ts-product-name="PD2250F_EX";
+	status = "okay";
+
+	tp_module1 {
+		compatible = "vivo,touch-panel-module";
+		vts-ic-number=<91>;
+		vts-type=<0>;
+		vts-lcmid=<19 255>;// CPD2240 1211867 TMG5.5 incell ILI7807S
+		vts-dimention-x=<1080>;
+		vts-dimention-y=<2408>;
+		vts-tx-sensors=<16>;
+		vts-rx-sensors=<36>;
+		vts-incell=<1>;
+		vts-need-caliberation=<0>;
+		vts-virtual-proximinity=<0>;
+		vts-long-press=<0>;
+		vts-module-vendor=<0xF0>;
+		vts-no-flash=<1>;
+		vts-gesture=<1>;
+		vts-game-mode=<1>;
+		vts-game-save-power=<1>;
+		vts-screenshot-triger=<1>;
+		vts-debug-cust=<1>;
+	};
+};

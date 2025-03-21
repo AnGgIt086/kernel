@@ -1,0 +1,1 @@
+PRODUCT_PACKAGES += vivo_ts.ko

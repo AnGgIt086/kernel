@@ -1,0 +1,222 @@
+config DRM_MEDIATEK
+	tristate "DRM Support for Mediatek SoCs"
+	depends on DRM
+	depends on COMMON_CLK
+	depends on HAVE_ARM_SMCCC
+	depends on OF
+	select DRM_GEM_CMA_HELPER
+	select DRM_KMS_HELPER
+	select DRM_MIPI_DSI
+	select DRM_PANEL
+	select MEMORY
+	select MTK_SMI
+        select FONT_SUPPORT
+	select GENERIC_PHY
+	help
+	  Choose this option if you have a Mediatek SoCs.
+	  The module will be called mediatek-drm
+	  This driver provides kernel mode setting and
+	  buffer management to userspace.
+
+config DRM_MEDIATEK_HDMI
+	tristate "DRM HDMI Support for Mediatek SoCs"
+	depends on DRM_MEDIATEK
+	select SND_SOC_HDMI_CODEC if SND_SOC
+	select GENERIC_PHY
+	help
+	  DRM/KMS HDMI driver for Mediatek SoCs
+
+config MTK_HDR_COLOR_GAIN_RGB
+	hex "Config CCORR parameters for HDR layers"
+	default 0
+	help
+	  This control color gain for hdr screen.
+	  0~11 bit for blue gain.
+	  12~23 bit for green gain.
+	  24~63 bit for red gain.
+
+config MTK_PQ_COLOR_MODE
+	string "Config PQ_COLOR_MODE (MDP & DISP COLOR on/off)"
+	default "DISP"
+	help
+	  This control mdp color on/off and disp color on/off
+	  if value equals to DISP, only display color is on.
+	  if value equals to MDP, only mdp color is on.
+	  if value equals to DISP_MDP, mdp and display color are both on.
+	  if value equals to OFF, mdp and display color are both off.
+
+config DRM_MTK_SHADOW_REGISTER_SUPPORT
+	bool "DRM shadow register Support for Mediatek SoCs"
+	depends on DRM_MEDIATEK
+	help
+	  DRM shadow register Support for Mediatek SoCs.
+	  define CONFIG_DRM_MTK_SHADOW_REGISTER_SUPPORT to
+	  enable Shadow Register on display.
+	  This feature will de-risk configuration time shortage.
+	  If you want to use Shadow Register on display,
+	  please make sure it is Y in xxx_defconfig.
+	  This feature depends on Mediatek SoCs HW spec.
+	  If unsure, set N.
+
+config DRM_MTK_DISABLE_AEE_LAYER
+	bool "Disable AEE Layer for the customer who don't want to produce AEE"
+	help
+	  Disable AEE Layer if you do not want to produce AEE.
+	  Default Mediatek SoCs will produce AEE when exception occurred.
+	  if this value is y, will not produce AEE.
+	  if this value is n, will produce AEE.
+	  If you do not produce AEE, please set it to Y in xxx_defconfig.
+config VIVO_BACKLIGHT_SUPPORT_LM3697
+	bool "LM3697(KTD3137) Support"
+	default n
+	---help---
+	  LED driver for lm3697(KTD3137) support.
+	  Set y to support.
+	  Set n to disable.
+config VIVO_I2C_BACKLIGHT_CURRENT_21MA
+	bool "LM3697(KTD3137) Support 21MA CURRENT"
+	default n
+	---help---
+	  LED driver for lm3697(KTD3137) support.
+	  Set y to support.
+	  Set n to disable.
+config VIVO_LCM_LM3697_LED_3_FEEDBACK
+	bool "LM3697(KTD3137) Support Led 3 keys"
+	default n
+	---help---
+	  LED driver for lm3697(KTD3137) support led 3 keys.
+	  Set y to support.
+	  Set n to disable.
+config VIVO_LCM_LM3697_LED_FULL_AW650NIT
+	bool "LM3697(AW99703C) Support Led FULL 650NIT"
+	default n
+	---help---
+	  LED driver for lm3697(AW99703C) support led full 650nit.
+	  Set y to support.
+	  Set n to disable.
+config VIVO_LCM_DCDC_SUPPORT
+	bool "bias dcdc Support"
+	default n
+	---help---
+	  bias driver for avdd avee support.
+	  Set y to support.
+	  Set n to disable.
+config VIVO_READ_DDIC_REG
+	bool "read DDIC panel_reg"
+	default n
+	help
+	read DDIC panel_reg for pd2202
+
+
+config MTK_MT6382_BDG
+
+	bool "Support Bridge IC 6382"
+	help
+	  This config decide if device with BridgeIC 6382
+	  BridgeIC 6382 can support VESA-1.2 DSC, compressing display framedata
+	  Normal project will disable it first
+	  If you are not sure about this, do not set it to y
+
+config DRM_PANEL_PD2215_SAMSUNG_S6E3FC3_FHDP_CMD
+	bool "PD2215 samsung s6e3fc3 cmd mode panel"
+	default n
+	help
+	  the first panel for pd2215
+
+config DRM_PANEL_PD2257_SAMSUNG_S6E8FC3_FHDP_VIDEO
+    bool "PD2257 samsung s6e8fc3 vdo mode panel"
+    default n
+    help
+      the first panel for PD2257
+
+config DRM_PANEL_PD2204_RM692E5_FHDP_CMD_BOE
+	bool "PD2204 RM692E5 cmd mode panel"
+	default n
+	help
+	  the first panel for PD2204
+
+config DRM_PANEL_PD2204_EA8079P_FHDP_CMD_SAMSUNG
+	bool "PD2204 EA8079P cmd mode panel"
+	default n
+	help
+	  the second panel for PD2204
+
+config DRM_PANEL_PD2230A_BOE_ICN9911C_HDPLUS_VIDEO
+	bool "PD2230A BOE ICN9911C HD video mode panel"
+	default n
+	help
+		the first panel for pd2230a
+
+config DRM_PANEL_PD2230_TXD_FT8016_HDPLUS_VIDEO
+	bool "PD2230 TXD FT8016 HD video mode panel"
+	default n
+	help
+		the second panel for pd2230a
+
+config DRM_PANEL_PD2230_TM_ILI7807S_FHDPLUS_VIDEO
+	bool "PD2230 TM ILI7807S FHD+ video mode panel"
+	default n
+	help
+		the first panel for pd2230
+
+config DRM_PANEL_PD2230_HX_FT8720P_FHDPLUS_VIDEO
+	bool "PD2230 HX FT8720P FHD+ video mode panel"
+	default n
+	help
+	  the second panel for pd2230
+
+config DRM_PANEL_PD2250_TM_ILI7807S_FHDPLUS_VIDEO
+	bool "PD2250 TM ILI7807S FHD+ video mode panel"
+	default n
+	help
+		the first panel for pd2250
+
+config DRM_PANEL_PD2250_BOE_ICN9911C_HDPLUS_VIDEO
+	bool "PD2250 BOE ICN9911C HD video mode panel"
+	default n
+	help
+		the first panel for pd2250
+
+config DRM_PANEL_PD2279_TM_ILI7807S_FHDPLUS_VIDEO
+	bool "PD2279 TM ILI7807S FHD+ video mode panel"
+	default n
+	help
+		the first panel for pd2279
+
+config DRM_PANEL_PD2279_HX_NT36672C_FHDPLUS_VIDEO
+	bool "PD2279F_EX HX NT36672C FHD+ video mode panel"
+	default n
+	help
+		the first panel for pd2279f_ex
+
+config DRM_PANEL_PD2279_TM_ILI7807S_CPHY_FHDPLUS_VIDEO
+	bool "PD2279 TM ILI7807S CPHY FHD+ video mode panel"
+	default n
+	help
+		the first panel for pd2279a
+
+config VIVO_LCM_SWITCH_PORCH
+	bool "switch hfp,send cmd and switch vfp at the same time"
+	default n
+	help
+	  for video screen, needs to cut hfp,send cmd and switch vfp at the same time
+
+config DRM_PANEL_PD2166_JDI_ILI7807S_FHDPLUS_VIDEO
+	bool "PD2166 JDI ILI7807S FHD+ video mode panel"
+	default n
+	help
+	  the second panel for pd2166
+
+config DRM_PANEL_PD2166_TM_ILI7807S_FHDPLUS_VIDEO
+	bool "PD2166 TM ILI7807S FHD+ video mode panel"
+	default n
+	help
+	  the first panel for pd2166
+
+config DRM_PANEL_PD2282_BOE_NT37705_FHDP_CMD
+	bool "PD2282 boe nt37705 cmd mode panel,LTPO"
+	default n
+	help
+	  the first panel for pd2282
+
+

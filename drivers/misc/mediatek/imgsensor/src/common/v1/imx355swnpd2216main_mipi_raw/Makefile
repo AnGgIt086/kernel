@@ -1,0 +1,1 @@
+obj-y += imx355swnpd2216mainmipiraw_Sensor.o

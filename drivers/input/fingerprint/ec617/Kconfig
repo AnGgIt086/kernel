@@ -1,0 +1,7 @@
+#
+# fp_sensor driver configuration
+#
+config BBK_EC617
+	tristate "egis fingerPrint sensor"
+	help
+		add for support egis FP Sensor.

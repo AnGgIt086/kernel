@@ -1,0 +1,18 @@
+
+# vivo add for gud kernel driver begin
+CONFIG_TEE=y
+CONFIG_TRUSTONIC_TEE_SUPPORT=y
+CONFIG_MTK_TEE_GP_SUPPORT=y
+# vivo add for gud kernel driver end
+
+# vivo gusx add for display driver begin
+CONFIG_LCM_PANEL_TYPE_TFT=y
+CONFIG_MTK_LEDS=y
+CONFIG_MTK_AAL_SUPPORT=y
+CONFIG_VIVO_BIT32_AAL_12_BIT=y
+# vivo gusx add for display driver end
+
+# vivo XieJiYuan add for kernel hardening begin
+CONFIG_SLAB_FREELIST_RANDOM=y
+CONFIG_SLAB_FREELIST_HARDENED=y
+# vivo XieJiYuan add for kernel hardening end
