@@ -35,7 +35,7 @@ obj-$(CONFIG_SND_SOC_MT6781) += mt6781/
 obj-$(CONFIG_SND_SOC_AW87519) += aw87519/
 
 #qinbaoqiang add for audio ktv begin
-obj-y += vivo_audio_ktv/
+#obj-y += vivo_audio_ktv/
 
 # mtk new arch
 ifeq ($(CONFIG_MTK_SND_SOC_NEW_ARCH),)
