@@ -336,6 +336,10 @@
 #define KEY_RFKILL		247	/* Key that controls all radios */
 
 #define KEY_MICMUTE		248	/* Mute / unmute the microphone */
+#define KEY_WAKEUP_SWIPE  249
+#define KEY_TS_LARGE_SUPPRESSION  250
+#define KEY_BAR_SWIPE  251  /* TS add for down_bar swipe */
+#define KEY_CUSTOM_GESTURE  252     /* TS add for custom gesture key */
 
 /* Code 255 is reserved for special needs of AT keyboard driver */
 
@@ -689,6 +693,8 @@
 #define BTN_TRIGGER_HAPPY39		0x2e6
 #define BTN_TRIGGER_HAPPY40		0x2e7
 
+#define KEY_IMUSIC_COLLECT		0x2f8 /* Key(760) to IMUSIC_COLLECT */
+
 /* We avoid low common keys in module aliases so they don't get huge. */
 #define KEY_MIN_INTERESTING	KEY_MUTE
 #define KEY_MAX			0x2ff
@@ -795,11 +801,10 @@
 #define SW_LINEIN_INSERT	0x0d  /* set = inserted */
 #define SW_MUTE_DEVICE		0x0e  /* set = device disabled */
 #define SW_PEN_INSERTED		0x0f  /* set = pen inserted */
-#define SW_MACHINE_COVER	0x10  /* set = cover closed */
-#define SW_HPHL_OVERCURRENT	0x11  /* set = over current on left hph */
-#define SW_HPHR_OVERCURRENT	0x12  /* set = over current on right hph */
-#define SW_MICROPHONE2_INSERT	0x13  /* set = inserted */
-#define SW_UNSUPPORT_INSERT	0x14  /* set = unsupported device inserted */
+#define SW_HPHL_OVERCURRENT	0x10  /* set = over current on left hph */
+#define SW_HPHR_OVERCURRENT	0x11  /* set = over current on right hph */
+#define SW_MICROPHONE2_INSERT	0x12  /* set = inserted */
+#define SW_UNSUPPORT_INSERT	0x13  /* set = unsupported device inserted */
 #define SW_MAX			0x20
 #define SW_CNT			(SW_MAX+1)
 
