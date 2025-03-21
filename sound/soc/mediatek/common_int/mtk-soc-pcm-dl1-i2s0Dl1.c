@@ -48,7 +48,6 @@
 #include "mtk-soc-afe-control.h"
 #include "mtk-soc-pcm-common.h"
 #include "mtk-soc-pcm-platform.h"
-#include "vivo_audio_ktv/vivo_audio_ktv.h"
 
 static struct afe_mem_control_t *pI2S0dl1MemControl;
 static struct snd_dma_buffer Dl1I2S0_Playback_dma_buf;
@@ -267,9 +266,6 @@ static int mtk_pcm_I2S0dl1_open(struct snd_pcm_substream *substream)
 		mtk_pcm_I2S0dl1_close(substream);
 		return ret;
 	}
-#ifdef VIVO_AUDIO_KTV
-	vivo_audio_ktv_rx_init();
-#endif
 	return 0;
 }
 
@@ -453,9 +449,6 @@ static int mtk_pcm_I2S0dl1_start(struct snd_pcm_substream *substream)
 		substream, irq_request_number(Soc_Aud_Digital_Block_MEM_DL1),
 		substream->runtime->rate,
 		irq1_cnt ? irq1_cnt : substream->runtime->period_size);
-#ifdef VIVO_AUDIO_KTV
-	vivo_audio_ktv_set_irq_mcu_counter();
-#endif
 	irq_user_id = substream;
 
 	SetSampleRate(Soc_Aud_Digital_Block_MEM_DL1, runtime->rate);

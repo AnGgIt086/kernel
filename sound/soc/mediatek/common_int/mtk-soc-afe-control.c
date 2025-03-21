@@ -48,7 +48,6 @@
 #include "mtk-soc-digital-type.h"
 #include "mtk-soc-pcm-common.h"
 #include "mtk-soc-pcm-platform.h"
-#include "vivo_audio_ktv/vivo_audio_ktv.h"
 
 #include <sound/core.h>
 #include <sound/jack.h>
@@ -1730,19 +1729,6 @@ static bool SetIrqMcuCounter(unsigned int irqmode, unsigned int Counter)
 	Afe_Set_Reg(irqCntReg->reg, Counter, irqCntReg->mask);
 	return true;
 }
-#ifdef VIVO_AUDIO_KTV
-void vivo_audio_ktv_set_irq_cnt(void)
-{
-	/*here to set irq period to 5ms, 240/48000=5ms*/
-	/*
-		cat /proc/mtksocaudio and these two regs below should be 0xf0
-		AFE_IRQ_MCU_CNT1 = 0xf0
-		AFE_IRQ_MCU_CNT2 = 0xf0
-	*/
-	SetIrqMcuCounter(Soc_Aud_IRQ_MCU_MODE_IRQ1_MCU_MODE, 240); /* for DL1/DL2 playback */
-	SetIrqMcuCounter(Soc_Aud_IRQ_MCU_MODE_IRQ2_MCU_MODE, 240); /* for capture */
-}
-#endif
 bool Set2ndI2SInConfig(unsigned int sampleRate, bool bIsSlaveMode)
 {
 	struct audio_digital_i2s I2S2ndIn_attribute;
@@ -4638,10 +4624,6 @@ static int mtk_mem_dlblk_copy(struct snd_pcm_substream *substream, int channel,
 			}
 
 			mem_blk_spinlock(mem_blk);
-		#ifdef VIVO_AUDIO_KTV
-			if (mem_blk == Soc_Aud_Digital_Block_MEM_DL1)
-				vivo_audio_ktv_rx_process(Afe_Block->pucVirtBufAddr, Afe_Block->u4WriteIdx, copy_size, Afe_Block->u4BufferSize);
-		#endif
 			Afe_Block->u4DataRemained += copy_size;
 			Afe_Block->u4WriteIdx = Afe_WriteIdx_tmp + copy_size;
 			Afe_Block->u4WriteIdx %= Afe_Block->u4BufferSize;
@@ -4686,10 +4668,6 @@ static int mtk_mem_dlblk_copy(struct snd_pcm_substream *substream, int channel,
 				}
 			}
 			mem_blk_spinlock(mem_blk);
-		#ifdef VIVO_AUDIO_KTV
-			if (mem_blk == Soc_Aud_Digital_Block_MEM_DL1)
-				vivo_audio_ktv_rx_process(Afe_Block->pucVirtBufAddr, Afe_Block->u4WriteIdx, size_1, Afe_Block->u4BufferSize);
-		#endif
 			Afe_Block->u4DataRemained += size_1;
 			Afe_Block->u4WriteIdx = Afe_WriteIdx_tmp + size_1;
 			Afe_Block->u4WriteIdx %= Afe_Block->u4BufferSize;
@@ -4720,10 +4698,6 @@ static int mtk_mem_dlblk_copy(struct snd_pcm_substream *substream, int channel,
 				}
 			}
 			mem_blk_spinlock(mem_blk);
-		#ifdef VIVO_AUDIO_KTV
-			if (mem_blk == Soc_Aud_Digital_Block_MEM_DL1)
-				vivo_audio_ktv_rx_process(Afe_Block->pucVirtBufAddr, Afe_Block->u4WriteIdx, size_2, Afe_Block->u4BufferSize);
-		#endif
 			Afe_Block->u4DataRemained += size_2;
 			Afe_Block->u4WriteIdx = Afe_WriteIdx_tmp + size_2;
 			Afe_Block->u4WriteIdx %= Afe_Block->u4BufferSize;
@@ -4815,12 +4789,6 @@ static int mtk_mem_ulblk_copy(struct snd_pcm_substream *substream, int channel,
 		__func__, (unsigned int)read_count, (unsigned int)read_size,
 		Vul_Block->u4DataRemained, Vul_Block->u4DMAReadIdx,
 		Vul_Block->u4WriteIdx);
-#endif
-#ifdef VIVO_AUDIO_KTV
-	mem_blk_spinlock(mem_blk);
-	if (mem_blk == Soc_Aud_Digital_Block_MEM_VUL || mem_blk == Soc_Aud_Digital_Block_MEM_VUL_DATA2)
-		vivo_audio_ktv_tx_process(Vul_Block->pucVirtBufAddr, DMA_Read_Ptr, read_size, Vul_Block->u4BufferSize);
-	mem_blk_spinunlock(mem_blk);
 #endif
 	if (DMA_Read_Ptr + read_size < Vul_Block->u4BufferSize) {
 		if (DMA_Read_Ptr != Vul_Block->u4DMAReadIdx) {

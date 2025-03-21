@@ -388,7 +388,4 @@ int mtk_pcm_mmap(struct snd_pcm_substream *substream,
 int mtk_afe_pcm_copy(struct snd_pcm_substream *substream,
 		     int channel, unsigned long hwoff,
 		     void *buf, unsigned long bytes);
-/*vivo ktv IRQ set*/
-void vivo_audio_ktv_set_irq_cnt(void);
-/*vivo ktv IRQ set*/
 #endif

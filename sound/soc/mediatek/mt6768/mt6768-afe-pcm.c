@@ -39,9 +39,6 @@
 #if defined(CONFIG_SND_SOC_MTK_SCP_SMARTPA)
 #include "../scp_spk/mtk-scp-spk-common.h"
 #endif
-/*add by yanghen for vivo audio ktv*/
-#include "../vivo_audio_ktv/vivo_audio_ktv.h"
-
 static const struct snd_pcm_hardware mt6768_afe_hardware = {
 	.info = (SNDRV_PCM_INFO_MMAP |
 		 SNDRV_PCM_INFO_INTERLEAVED |
@@ -150,11 +147,6 @@ int mt6768_fe_trigger(struct snd_pcm_substream *substream, int cmd,
 			ret = mtk_memif_set_enable(afe, id);
 #else
 		ret = mtk_memif_set_enable(afe, id);
-#endif
-#ifdef VIVO_AUDIO_KTV
-  		/* vivo_audio_ktv_set_irq_mcu_counter(); */
- 		if (substream->stream == SNDRV_PCM_STREAM_CAPTURE)
-  			vivo_audio_ktv_set_channels(substream->runtime->channels);
 #endif
 		/*
 		 * for small latency record
@@ -2216,53 +2208,6 @@ static int mt6768_afe_runtime_resume(struct device *dev)
 skip_regmap:
 	return 0;
 }
-#ifdef VIVO_AUDIO_KTV
-static int mtk_afe_pcm_ktv_process(struct snd_pcm_substream *substream,
-				      unsigned int hwoff,
-				      snd_pcm_uframes_t frames)
-{
-	struct snd_soc_pcm_runtime *rtd = substream->private_data;
-	struct snd_soc_component *component = snd_soc_rtdcom_lookup(rtd, AFE_PCM_NAME);
-	struct mtk_base_afe *afe = snd_soc_component_get_drvdata(component);
-	int id = rtd->cpu_dai->id;
-	struct mtk_base_afe_memif *memif = &afe->memif[id];
-	int irq_id = memif->irq_usage;
-	struct mtk_base_afe_irq *irqs = &afe->irqs[irq_id];
-	const struct mtk_base_irq_data *irq_data = irqs->irq_data;
-	unsigned int counter = 0;
-
-	if (!vivo_audio_ktv_get_status())
-		return 0;
-
-	if (rtd->cpu_dai->id == MT6768_MEMIF_DL1 || rtd->cpu_dai->id == MT6768_MEMIF_VUL12) {
-		regmap_read(afe->regmap, irq_data->irq_cnt_reg, &counter);
-		if (counter != 240)
-			mtk_regmap_update_bits(afe->regmap, irq_data->irq_cnt_reg,
-					       irq_data->irq_cnt_maskbit
-					       << irq_data->irq_cnt_shift,
-					       240 << irq_data->irq_cnt_shift);
-	}
-
-	if (substream->stream == SNDRV_PCM_STREAM_PLAYBACK) {
-		if (rtd->cpu_dai->id == MT6768_MEMIF_DL1) {
-			vivo_audio_ktv_rx_process(substream->runtime->dma_area,
-					  hwoff,
-					  frames_to_bytes(substream->runtime, frames),
-					  substream->runtime->dma_bytes);
-		}
-
-	} else { /* substream->stream == SNDRV_PCM_STREAM_CAPTURE */
-		if (rtd->cpu_dai->id == MT6768_MEMIF_VUL12) {
-			vivo_audio_ktv_set_channels(substream->runtime->channels);
-			vivo_audio_ktv_tx_process(substream->runtime->dma_area,
-					  hwoff,
-					  frames_to_bytes(substream->runtime, frames),
-					  substream->runtime->dma_bytes);
-		}
-	}
-	return 0;
-}
-#endif
 static int mt6768_afe_pcm_copy(struct snd_pcm_substream *substream,
 			       int channel, unsigned long hwoff,
 			       void *buf, unsigned long bytes,

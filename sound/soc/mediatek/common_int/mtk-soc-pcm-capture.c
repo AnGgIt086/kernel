@@ -48,7 +48,6 @@
 #include "mtk-soc-afe-control.h"
 #include "mtk-soc-pcm-common.h"
 #include "mtk-soc-pcm-platform.h"
-#include "vivo_audio_ktv/vivo_audio_ktv.h"
 
 #define AUDIO_ALLOCATE_SMP_RATE_DECLARE
 
@@ -431,10 +430,6 @@ static int mtk_capture_pcm_open(struct snd_pcm_substream *substream)
 		mtk_capture_pcm_close(substream);
 		return ret;
 	}
-#ifdef VIVO_AUDIO_KTV
-	vivo_audio_ktv_tx_init();
-#endif
-
 	return 0;
 }
 
@@ -499,10 +494,6 @@ static int mtk_capture_alsa_start(struct snd_pcm_substream *substream)
 	irq_add_substream_user(substream, irq_request_number(cap_mem_blk),
 			       substream->runtime->rate,
 			       substream->runtime->period_size);
-#ifdef VIVO_AUDIO_KTV
-	vivo_audio_ktv_set_irq_mcu_counter();
-	vivo_audio_ktv_set_channels(substream->runtime->channels);
-#endif
 	irq_user_id = substream;
 
 	EnableAfe(true);
